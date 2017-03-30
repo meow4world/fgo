@@ -18,14 +18,6 @@ import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import 'muse-ui/dist/theme-carbon.css'
 Vue.use(MuseUI)
-    // import 'muse-components/styles/base.less' // 加载基础的样式
-    // import appBar from 'muse-components/appBar'
-    // import avatar from 'muse-components/avatar'
-    //     // ..
-    // Vue.component(appBar.name, appBar)
-    // Vue.component(avatar.name, avatar)
-
-
 
 Vue.config.productionTip = false
     //关闭生产模式下给出的提示

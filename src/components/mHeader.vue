@@ -8,8 +8,8 @@
                         <mu-avatar :src="tx" slot="leftAvatar" />
                         <mu-icon value="grade" slot="right" />
                     </mu-list-item>
-                    <mu-list-item title="Menu Item 2" />
-                    <mu-list-item title="Menu Item 3" />
+                    <mu-list-item title="英灵图鉴" href="#/guide"/>
+                    <mu-list-item title="礼装图鉴" />
                     <mu-list-item v-if="!docked" @click.native="open = false" title="Close" />
                 </mu-list>
 
@@ -22,6 +22,7 @@
             <mu-menu-item title="水鸭绿" value="teal" />
         </mu-icon-menu>
     </mu-appbar>
+
 </template>
 <script>
 //导入主题样式
@@ -81,9 +82,6 @@ export default {
     components: {
        
     },
-    mounted:{
-        // document.body.style.background="url('../img/bg.jpg')"
-    }
 }
 </script>
 <style>

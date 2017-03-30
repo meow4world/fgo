@@ -1,15 +1,15 @@
 <template>
     <div id="app">
+        <mHeader></mHeader>
         <router-view></router-view>
-        <mSwiper></mSwiper>
     </div>
 </template>
 <script>
-import mSwiper from '@/components/mSwiper'
+import mHeader from '@/components/mHeader'
 export default {
     name: 'index',
     components: {
-      mSwiper,
+        mHeader,
     }
 }
 </script>
