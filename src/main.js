@@ -4,6 +4,7 @@ import Vue from 'vue'
 import Index from './index.vue'
 import router from './router'
 
+
 // import VueRouter from 'vue-router';
 // Vue.use(VueRouter);
 import Vuex from 'vuex'

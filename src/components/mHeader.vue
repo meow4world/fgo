@@ -9,7 +9,7 @@
                         <mu-icon value="grade" slot="right" />
                     </mu-list-item>
                     <mu-list-item title="英灵图鉴" href="#/guide"/>
-                    <mu-list-item title="礼装图鉴" />
+                    <mu-list-item title="礼装图鉴" href="#/test"/>
                     <mu-list-item v-if="!docked" @click.native="open = false" title="Close" />
                 </mu-list>
 

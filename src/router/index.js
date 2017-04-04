@@ -5,6 +5,7 @@ import mGuide from '@/components/mGuide'
 import Router from 'vue-router'
 Vue.use(Router)
 
+import test from '@/components/test'
 export default new Router({
   routes: [
     {
@@ -16,6 +17,11 @@ export default new Router({
     	path:'/guide',
     	name:'英灵图鉴',
     	component:mGuide
+    },
+    {
+      path:'/test',
+      name:'测试',
+      component:test
     }
   ]
 })

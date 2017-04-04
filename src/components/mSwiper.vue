@@ -36,7 +36,7 @@ module.exports = {
         	}).then(function(data){
         		console.log('success:',data)
         		 this.swipers = data.data.data
-        		 console.log(data.data.data)
+        		 // console.log(data.data.data)
         	},function(err){
         		console.log('err:',err);
         	})
