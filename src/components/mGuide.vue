@@ -1,24 +1,16 @@
 <template>
 <div class="infinite-container" :style="{height:listHeight-offsetTop+'px'}">
 	<div class="container">
-		<mu-auto-complete  icon="search" class="appbar-search-field" hintText="请随便输入搜索英灵" labelFloat label="英灵查询"  @input="handleInput" :dataSource="dataSource" @change="handlechange" fullWidth/>
+		<mu-auto-complete  icon="search" class="appbar-search-field" hintText="请随便输入搜索英灵" labelFloat label="英灵查询"  @input="handleInput" :dataSource="dataSource" @change="handlechange" fullWidth v-model='aaa'/>
 	</div>
-	<!-- <mu-raised-button label="查询" class="demo-raised-button" solt='right' primary labelFloat /> -->
-		  <mu-grid-list class="gridlist-demo">
-    		<!-- <mu-sub-header>英灵展示</mu-sub-header> -->
-    		<mu-grid-tile v-for="it, index in list" :key="index">
+		  <mu-grid-list class="gridlist-demo" :cols='4' :cellHeight='100'>
+    		<mu-grid-tile v-for="it, index in list" :key="index" :data-id='it.id'>
      		<img :src="it.image|imgUrl"/>
       		<span slot="title">{{it.name}}</span>
       		<span slot="subTitle"><b>{{it.name_jp}}</b></span>
       		<mu-icon-button icon="star_border" slot="action"/>
     	    </mu-grid-tile>
  		</mu-grid-list>
-<!-- 		<mu-list>
-		<template v-for="item in list">
-			<mu-list-item :title="item.name"/>
-			<mu-divider/>
-		</template>
-		</mu-list> -->
 		<mu-infinite-scroll :scroller="scroller" :loading="loading"    @load="loadMore" />
 	
 </div>
@@ -35,10 +27,12 @@
 				listHeight:'',
 				offsetTop:'',
 				i:1,
+				aaa:'',
 			}
 		},
 		methods: {
 			handlechange (val) {
+				this.i=1;
 				let _params = JSON.stringify({keyword:val});
 				this.$http.jsonp("http://api.umowang.com/guides/data/fgo",{
 					dataType:'jsonp',
@@ -51,7 +45,7 @@
 						'params':_params,
 					}
 				}).then(function(response){
-					console.log(response.data.data)
+					//console.log(response.data.data)
 					this.list=response.data.data
 					
 				},function(err){
@@ -59,7 +53,7 @@
 				})
 			},
 			handleInput (val) {
-				console.log(val)
+				//console.log(val)
 				let _params = JSON.stringify({keyword:val});
 				let _command = 'pets_list_all';
 				if(val == ''||val==undefined){
@@ -78,7 +72,7 @@
 						'params':_params,
 					}
 				}).then(function(response){
-					console.log(response.data.data)
+					//console.log(response.data.data)
 					this.list=response.data.data
 					
 				},function(err){
@@ -89,16 +83,42 @@
 				]
 			},
 			loadMore () {
-				console.log("到底了")
+				//console.log("到底了")
 				this.loading = true
-				setTimeout(() => { 
+				let _params = JSON.stringify({keyword:this.aaa});
+				let _command = 'pets_list_all';
+				if(this.aaa == ''||this.aaa==undefined){
+					_command = 'pets_list_all'
+				}else{
+					_command = 'pets_list_search'
+				}
+				this.i++
+				this.$http.jsonp("http://api.umowang.com/guides/data/fgo",{
+					dataType:'jsonp',
+					jsonp:'jsoncallback',
+					jsoncallback:'getguidedata',
+					params:{
+						'jsoncallback':'getguidedata',
+						'command':_command,
+						'page':this.i,
+						'params':_params,
+					}
+				}).then(function(response){
+					//console.log(response)
+					if(response.data.count==0){
+						this.i--
+
+					}else{
+						this.list=this.list.concat(response.data.data)
+					}
 					this.loading = false
-				},500)
-				// this.$http.jsonp
+				},function(err){
+					console.log('未知错误'+err)
+				})
 			},
 			getClientHeight(){
 				var self =this;
-				console.log(window.screen);
+				//console.log(window.screen);
 				this.listHeight = window.screen.height;
 				this.offsetTop = document.getElementsByClassName('infinite-container')[0].offsetTop;
 				window.addEventListener("resize",function(){

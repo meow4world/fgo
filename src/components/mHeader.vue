@@ -4,7 +4,7 @@
         <mu-drawer :open="open" :docked="docked" @close="toggle()">
 
                 <mu-list @itemClick="docked ? '' : toggle()">
-                    <mu-list-item title="菜单">
+                    <mu-list-item title="菜单" href="#/">
                         <mu-avatar :src="tx" slot="leftAvatar" />
                         <mu-icon value="grade" slot="right" />
                     </mu-list-item>
@@ -18,7 +18,7 @@
         <mu-icon-menu icon="more_vert" slot="right" :value="theme" @change="changeTheme" title="主题" :anchorOrigin="leftBottom" :targetOrigin="leftTop" v-bind:style="theme=='dark'?{background:'none'}:''">
             <mu-menu-item title="主题(默认)" value="carbon" />
             <mu-menu-item title="夜间模式" value="dark" />
-            <mu-menu-item title="湖水蓝" value="light" />
+            <mu-menu-item title="沉香紫" value="light" />
             <mu-menu-item title="水鸭绿" value="teal" />
         </mu-icon-menu>
     </mu-appbar>
